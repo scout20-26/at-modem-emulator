@@ -90,15 +90,6 @@ Config Config::load(const std::string& path)
         std::string expect = line.substr(0U, separator);
         std::string answer = line.substr(separator + 1U);
 
-        // A leading UTF-8 BOM is tolerated on the first rule.
-        if (config.rules_.empty() &&
-            expect.size() >= 3U &&
-            static_cast<unsigned char>(expect[0]) == 0xEFU &&
-            static_cast<unsigned char>(expect[1]) == 0xBBU &&
-            static_cast<unsigned char>(expect[2]) == 0xBFU) {
-            expect.erase(0U, 3U);
-        }
-
         config.rules_.push_back(
             CommandRule{std::move(expect), decode_escapes(answer)});
     }
