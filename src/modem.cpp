@@ -20,7 +20,7 @@ void Modem::send(const std::string& text)
 
 void Modem::process_command(std::string command)
 {
-    // Ignore an optional LF following CR.
+    // Ignore an optional CR following LF.
     if (!command.empty() && command.back() == '\r') {
         command.pop_back();
     }
